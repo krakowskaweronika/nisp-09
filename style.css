@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  background: #0a0a0a;
+  color: white;
+  font-family: Arial;
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 4rem;
+  color: #ff00cc;
+  text-shadow: 0 0 20px #ff00cc;
+}
+
+button {
+  padding: 15px;
+  background: #ff00cc;
+  border: none;
+}
+
+section {
+  padding: 50px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 0.5s;
+}

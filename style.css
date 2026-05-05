@@ -1,49 +1,127 @@
-body {
-margin: 0;
-background: #0a0a0a;
-color: white;
-font-family: Arial;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: Arial;
+  background: #071a33;
+  color: white;
+}
+
+/* HERO */
 .hero {
-height: 100vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-background: radial-gradient(circle, #1a1a1a, #000);
+  height: 100vh;
+  background: linear-gradient(135deg, #001b3d, #ffd200);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,210,0,0.2), transparent);
+  animation: pulse 6s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.hero-content {
+  z-index: 2;
 }
 
 h1 {
-font-size: 4rem;
-color: #ff00cc;
-text-shadow: 0 0 20px #ff00cc;
+  font-size: 4rem;
+  color: #ffd200;
+  text-shadow: 0 0 30px #002f6c;
 }
 
+.date {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+/* BUTTON */
 button {
-padding: 15px;
-background: #ff00cc;
-border: none;
-box-shadow: 0 0 15px #ff00cc;
-cursor: pointer;
+  margin-top: 20px;
+  padding: 15px 30px;
+  background: #ffd200;
+  border: none;
+  color: #001b3d;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-section {
-padding: 50px;
+button:hover {
+  transform: scale(1.05);
 }
 
-.fade-in {
-opacity: 0;
-transform: translateY(50px);
-transition: 0.5s;
-}
-
-#lineup li {
-margin: 10px 0;
-}
-
+/* COUNTDOWN */
 #countdown {
-text-align: center;
-margin: 20px;
-font-size: 1.5rem;
+  text-align: center;
+  padding: 30px;
+  font-size: 1.5rem;
+  background: #081f3f;
+}
+
+/* LINEUP */
+.lineup {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.card {
+  background: #002f6c;
+  border: 2px solid #ffd200;
+  padding: 25px;
+  border-radius: 12px;
+  min-width: 180px;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px #ffd200;
+}
+
+/* INFO */
+.info {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #061326;
+  opacity: 0.7;
+}
+
+/* FADE ANIMATION */
+.fade {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s;
 }

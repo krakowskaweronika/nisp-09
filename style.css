@@ -1,46 +1,49 @@
 body {
-  margin: 0;
-  background: #0a0a0a;
-  color: white;
-  font-family: Arial;
+margin: 0;
+background: #0a0a0a;
+color: white;
+font-family: Arial;
 }
 
 .hero {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background: radial-gradient(circle, #1a1a1a, #000);
 }
 
 h1 {
-  font-size: 4rem;
-  color: #ff00cc;
-  text-shadow: 0 0 20px #ff00cc;
+font-size: 4rem;
+color: #ff00cc;
+text-shadow: 0 0 20px #ff00cc;
 }
 
 button {
-  padding: 15px;
-  background: #ff00cc;
-  border: none;
+padding: 15px;
+background: #ff00cc;
+border: none;
+box-shadow: 0 0 15px #ff00cc;
+cursor: pointer;
 }
 
 section {
-  padding: 50px;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: 0.5s;
+padding: 50px;
 }
 
-.hero {
-  background: radial-gradient(circle, #1a1a1a, #000);
-}
-
-button {
-  box-shadow: 0 0 15px #ff00cc;
-  cursor: pointer;
+.fade-in {
+opacity: 0;
+transform: translateY(50px);
+transition: 0.5s;
 }
 
 #lineup li {
-  margin: 10px 0;
+margin: 10px 0;
+}
+
+#countdown {
+text-align: center;
+margin: 20px;
+font-size: 1.5rem;
 }

@@ -5,6 +5,7 @@ const CONFIG = {
 
 const formatTime = (value) => String(value).padStart(2, "0");
 
+/* SCROLL ANIMATOR */
 class ScrollAnimator {
   constructor() {
     this.elements = document.querySelectorAll(".fade-in");
@@ -12,17 +13,21 @@ class ScrollAnimator {
   }
 
   init() {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            this.animate(entry.target);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: CONFIG.animationThreshold }
-    );
+    if (!("IntersectionObserver" in window)) {
+      this.elements.forEach(el => this.animate(el));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.animate(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: CONFIG.animationThreshold
+    });
 
     this.elements.forEach(el => observer.observe(el));
   }
@@ -33,17 +38,14 @@ class ScrollAnimator {
   }
 }
 
+/* COUNTDOWN */
 class Countdown {
-  constructor(containerId) {
-    this.container = document.getElementById(containerId);
+  constructor(id) {
+    this.container = document.getElementById(id);
     if (!this.container) return;
 
-    this.start();
-  }
-
-  start() {
     this.update();
-    this.interval = setInterval(() => this.update(), 1000);
+    setInterval(() => this.update(), 1000);
   }
 
   update() {
@@ -52,7 +54,6 @@ class Countdown {
 
     if (diff <= 0) {
       this.container.innerHTML = "🎉 Zaczynamy!";
-      clearInterval(this.interval);
       return;
     }
 
@@ -63,64 +64,45 @@ class Countdown {
 
     this.container.innerHTML = `
       <h2>Start za:</h2>
-      <div style="font-size: 2rem; letter-spacing: 2px;">
+      <div>
         ${days}d ${formatTime(hours)}h ${formatTime(minutes)}m ${formatTime(seconds)}s
       </div>
     `;
   }
 }
 
+/* CTA */
 class CTAHandler {
-  constructor(buttonId) {
-    this.button = document.getElementById(buttonId);
+  constructor(id) {
+    this.button = document.getElementById(id);
     if (!this.button) return;
 
-    this.init();
-  }
-
-  init() {
-    this.button.addEventListener("click", () => this.handleClick());
-  }
-
-  handleClick() {
-    this.button.innerText = "🔥 Widzimy się!";
-    this.button.style.transform = "scale(1.1)";
-    
-    setTimeout(() => {
-      this.button.style.transform = "scale(1)";
-    }, 200);
-
-    document.querySelector(".lineup")?.scrollIntoView({
-      behavior: "smooth"
+    this.button.addEventListener("click", () => {
+      this.button.innerText = "🔥 Widzimy się!";
+      document.querySelector(".lineup").scrollIntoView({
+        behavior: "smooth"
+      });
     });
   }
 }
 
+/* PARALLAX */
 class Parallax {
   constructor() {
     this.hero = document.querySelector(".hero");
     if (!this.hero) return;
 
-    this.bind();
-  }
-
-  bind() {
     window.addEventListener("scroll", () => {
       const offset = window.scrollY;
-      this.hero.style.transform = `translateY(${offset * 0.3}px)`;
+      this.hero.style.transform = `translateY(${offset * 0.2}px)`;
     });
   }
 }
 
-class App {
-  constructor() {
-    document.addEventListener("DOMContentLoaded", () => {
-      new ScrollAnimator();
-      new Countdown("countdown");
-      new CTAHandler("cta");
-      new Parallax();
-    });
-  }
-}
-
-new App();
+/* START */
+document.addEventListener("DOMContentLoaded", () => {
+  new ScrollAnimator();
+  new Countdown("countdown");
+  new CTAHandler("cta");
+  new Parallax();
+});
